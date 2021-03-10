@@ -15,5 +15,13 @@ func main() {
 	fmt.Println("\n\nLeft cards: ")
 	leftCards.print()
 
-	leftCards.writeToFile()
+	leftCards.writeToFile("deck")
+	readDeck := newDeckFromFile("deck")
+
+	fmt.Println("\n\nRead cards: ")
+	readDeck.print()
+
+	readDeck.shuffle()
+	fmt.Println("\n\nShuffled cards: ")
+	readDeck.print()
 }

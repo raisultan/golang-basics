@@ -4,7 +4,9 @@ import (
 	"fmt"
 	"io/ioutil"
 	"log"
+	"math/rand"
 	"strings"
+	"time"
 )
 
 type deck []string
@@ -57,10 +59,10 @@ func (d deck) toString() string {
 	return deckString
 }
 
-func (d deck) writeToFile() {
+func (d deck) writeToFile(path string) {
 	deckString := d.toString()
 	content := []byte(deckString)
-	err := ioutil.WriteFile("deck", content, 0644)
+	err := ioutil.WriteFile(path, content, 0644)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -68,4 +70,20 @@ func (d deck) writeToFile() {
 
 func deal(d deck, handSize int) (deck, deck) {
 	return d[:handSize], d[handSize:]
+}
+
+func newDeckFromFile(path string) deck {
+	content, err := ioutil.ReadFile(path)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	contentString := string(content)
+	cards := strings.Split(contentString, "\n")
+	return deck(cards)
+}
+
+func (d deck) shuffle() {
+	rand.Seed(time.Now().UnixNano())
+	rand.Shuffle(len(d), func(i int, j int) { d[i], d[j] = d[j], d[i] })
 }
