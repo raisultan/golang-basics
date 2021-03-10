@@ -40,3 +40,13 @@ func (d deck) print() {
 		fmt.Println(i, card)
 	}
 }
+
+// another receiver for `deck` type
+func (d deck) deal(numOfCards int) deck {
+	dealtCards := d[:numOfCards]
+	return dealtCards
+}
+
+func deal(d deck, handSize int) (deck, deck) {
+	return d[:handSize], d[handSize:]
+}
