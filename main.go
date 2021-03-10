@@ -14,4 +14,6 @@ func main() {
 
 	fmt.Println("\n\nLeft cards: ")
 	leftCards.print()
+
+	leftCards.writeToFile()
 }
