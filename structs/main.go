@@ -27,6 +27,10 @@ func (p person) print() {
 // compiler makes a copy of value and then passes it to the function body
 // thus, on things like adjusting a value we must pass not a value but a pointer to that value
 
+// "&" and "*"
+// "&" before variable gives address of the variable in the memory
+// "*" before the address of a variable in the memory gives its value that lies on that address
+
 func (personPointer *person) updateFirstName(newFirstName string) {
 	(*personPointer).firstName = newFirstName
 }
