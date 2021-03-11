@@ -5,40 +5,44 @@ import (
 	"testing"
 )
 
+const expectedDeckLength = 52
+
 func TestNewDeck(t *testing.T) {
-	d := newDeck()
+	deck := newDeck()
+	deckLength := len(deck)
 
-	if actualLen := len(d); actualLen != 52 {
-		t.Errorf("Expected deck length of 56, got %v", actualLen)
+	if deckLength != expectedDeckLength {
+		t.Errorf("Expected deck length of %v, got %v", expectedDeckLength, deckLength)
 	}
 
-	if d[0] != "Ace of Spades" {
-		t.Errorf("Expected Ace of Spades, got %v", d[0])
+	if deck[0] != "Ace of Spades" {
+		t.Errorf("Expected Ace of Spades, got %v", deck[0])
 	}
 
-	if d[51] != "Queen of Clubs" {
-		t.Errorf("Expected Queen of Clubs, got %v", d[0])
+	if deck[deckLength-1] != "Queen of Clubs" {
+		t.Errorf("Expected Queen of Clubs, got %v", deck[deckLength-1])
 	}
 }
 
 func TestWriteToFileAndNewDeckFormFile(t *testing.T) {
-	path := "_decktesting"
+	const path = "_decktesting"
 	os.Remove(path)
 
 	d := newDeck()
 	d.writeToFile(path)
 	readDeck := newDeckFromFile(path)
+	deckLength := len(readDeck)
 
-	if actualLen := len(readDeck); actualLen != 52 {
-		t.Errorf("Expected deck length of 56, got %v", actualLen)
+	if deckLength != expectedDeckLength {
+		t.Errorf("Expected deck length of %v, got %v", expectedDeckLength, deckLength)
 	}
 
 	if readDeck[0] != "Ace of Spades" {
 		t.Errorf("Expected Ace of Spades, got %v", readDeck[0])
 	}
 
-	if readDeck[51] != "Queen of Clubs" {
-		t.Errorf("Expected Queen of Clubs, got %v", readDeck[0])
+	if readDeck[deckLength-1] != "Queen of Clubs" {
+		t.Errorf("Expected Queen of Clubs, got %v", readDeck[deckLength-1])
 	}
 
 	os.Remove(path)
