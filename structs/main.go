@@ -23,6 +23,14 @@ func (p person) print() {
 	)
 }
 
+// golang is "pass by value" language. it means that when executing a function,
+// compiler makes a copy of value and then passes it to the function body
+// thus, on things like adjusting a value we must pass not a value but a pointer to that value
+
+func (personPointer *person) updateFirstName(newFirstName string) {
+	(*personPointer).firstName = newFirstName
+}
+
 func main() {
 	john := person{
 		"John",
@@ -41,5 +49,8 @@ func main() {
 	greg.lastName = "Peterson"
 	greg.contact.email = "gregpeterson@peterson.com"
 	greg.contact.zipCode = 6786
+
+	gregPointer := &greg
+	gregPointer.updateFirstName("Gregory")
 	greg.print()
 }
