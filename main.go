@@ -4,7 +4,7 @@ import "fmt"
 
 func main() {
 	cards := newDeck()
-	fmt.Println("Ful deck: ")
+	fmt.Println("Full deck: ")
 	cards.print()
 
 	dealtCards, leftCards := deal(cards, 5)
