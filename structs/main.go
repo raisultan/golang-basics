@@ -10,7 +10,7 @@ type contactInfo struct {
 type person struct {
 	firstName string
 	lastName  string
-	contact   contactInfo
+	contact   contactInfo // property name may be left empty then, struct name will be the property name - contactInfo in our case
 }
 
 func (p person) print() {
