@@ -23,3 +23,11 @@ func printGreeting(eb englishBot) {
 func printGreeting(sb spanishBot) {
 	fmt.Println(sb.getGreeting())
 }
+
+func main() {
+	eb := englishBot{}
+	sb := spanishBot{}
+
+	printGreeting(eb)
+	printGreeting(sb)
+}
