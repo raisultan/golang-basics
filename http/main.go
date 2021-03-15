@@ -1,11 +1,20 @@
 package main
 
 import (
+	"fmt"
 	"io"
 	"log"
 	"net/http"
-	"os"
 )
+
+type logWriter struct{}
+
+func (logWriter) Write(bs []byte) (int, error) {
+	fmt.Println(string(bs))
+	fmt.Println("Number of bytes written: ", len(bs))
+
+	return len(bs), nil
+}
 
 func main() {
 	resp, err := http.Get("http://google.com")
@@ -13,6 +22,8 @@ func main() {
 		log.Fatal(err)
 	}
 
+	lw := logWriter{}
+
 	// reader interface writes to writer interface
-	io.Copy(os.Stdout, resp.Body)
+	io.Copy(lw, resp.Body)
 }
