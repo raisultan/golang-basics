@@ -22,9 +22,10 @@ func main() {
 		go checkUrl(url, c)
 	}
 
-	for i := 0; i < len(urls); i++ {
+	// continuous for loop
+	for {
 		// blocking call
-		fmt.Println(<-c)
+		go checkUrl(<-c, c)
 	}
 }
 
@@ -32,10 +33,11 @@ func main() {
 func checkUrl(url string, c chan string) {
 	_, err := http.Get(url) // blocking call
 	if err != nil {
-		c <- "Something wrong with - " + url
+		fmt.Println("Something wrong with - " + url)
 	} else {
-		c <- "Everything is OK with - " + url
+		fmt.Println("Everything is OK with - " + url)
 	}
+	c <- url
 }
 
 // everything that executed in golang is executed in goroutines (main func too)
