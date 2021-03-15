@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"net/http"
+	"time"
 )
 
 func main() {
@@ -24,7 +25,10 @@ func main() {
 
 	// receiving data from channel and processing it
 	for url := range c {
-		go checkUrl(url, c)
+		go func(u string) { // function literal = anon func
+			time.Sleep(3 * time.Second)
+			checkUrl(u, c)
+		}(url) // pass by value not reference, because original value can be changed during the processing of the func
 	}
 	// equivalent for [just syntactic sugar for simplicity of comprehension]
 	// continuous for loop
