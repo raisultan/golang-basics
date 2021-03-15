@@ -15,7 +15,8 @@ func main() {
 	}
 
 	for _, url := range urls {
-		checkUrl(url)
+		// birth of new child - goroutine
+		go checkUrl(url)
 	}
 
 }
@@ -55,3 +56,12 @@ func checkUrl(url string) {
 // in other words, if one thread starts blocking process, we switch to another thread. concisely, it means that we have smart thread scheduler.
 
 // Parallellism is about processing and doing multiple things - goroutines at the same time, which clearly states that we must have MULTIPLE cores.
+
+// Goroutines priority & Channels
+// main func always has first level of priority, that means, it controls the workflow of the whole program, when to start and when to exit.
+// so there can be a subtle misunderstanding. for example, in our case, when main func finishes looping through the slice, it finishes.
+// because there is nothing else to run. even though we have multiple goroutines, those are not finished their execution.
+// so here comes Channels to help us COMMUNICATE BETWEEN GOROUTINES. and Channels is the only way to communicate between goroutines.
+// Channel is value, but its behavior and working mechanism is different. it is pub/sub like mechanism.
+// if goroutine has access to a channel, it can receive values passed to the channel by other goroutines.
+// and we should not forget that channels are strictly typed. so data passed and received through the channel can only be of one specifc type.
