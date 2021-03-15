@@ -2,7 +2,7 @@ package main
 
 import "fmt"
 
-// declaring common behavior that bots wil have
+// declaring common behavior that bots wil have, interfaces are not GENERICS
 // so if any custom type has fields and methods of bot - interface
 // they become member of type bot
 type bot interface {
