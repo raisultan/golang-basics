@@ -22,8 +22,10 @@ func main() {
 		go checkUrl(url, c)
 	}
 
-	// will receive only first value and exit
-	fmt.Println(<-c)
+	for i := 0; i < len(urls); i++ {
+		// blocking call
+		fmt.Println(<-c)
+	}
 }
 
 // channel must be passed to func to communicate back and must be fully typed - `c chan string`
