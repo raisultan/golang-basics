@@ -2,7 +2,11 @@ package main
 
 import "fmt"
 
+// declaring common behavior that bots wil have
+// so if any custom type has fields and methods of bot - interface
+// they become member of type bot
 type bot interface {
+	// any custom type that has receiver - getGreeting() is available
 	getGreeting() string
 }
 
