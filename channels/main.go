@@ -38,3 +38,13 @@ func checkUrl(url string) {
 // overall compileflow of main func is not changed. though, when it sees `go` keyword, compiler just executes the func
 // and moves on, which results in number of goroutines at the same time.
 // main difference is results of those executed funcs returns to main, only when corresponding goroutine finishes its execution
+
+// low level explanation goroutines
+// by default golang compiler executes goroutines only on one core of CPU
+// this process handled by Go Scheduler. its purpose is to monitor and detect when to run specific goroutine, when to wait
+// and execute another goroutine, while one is on the blocking process.
+
+// with multiple CPU cores enabled for golang compiler Go Scheduler starts to work a bit different.
+// the difference is that now Go Scheduler can run multiple goroutines at the same time, based on number of cores.
+// for example, if machine has 3 enabled cores, then scheduler runs 3 goroutines at once.
+// contrary for one core, when scheduler runs one at a time, and waits for blocking process to launch another goroutine.
