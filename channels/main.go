@@ -22,11 +22,15 @@ func main() {
 		go checkUrl(url, c)
 	}
 
-	// continuous for loop
-	for {
-		// blocking call
-		go checkUrl(<-c, c)
+	// receiving data from channel and processing it
+	for url := range c {
+		go checkUrl(url, c)
 	}
+	// equivalent for [just syntactic sugar for simplicity of comprehension]
+	// continuous for loop
+	// for {
+	// 	go checkUrl(<-c, c)
+	// }
 }
 
 // channel must be passed to func to communicate back and must be fully typed - `c chan string`
