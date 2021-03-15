@@ -2,26 +2,16 @@ package main
 
 import "fmt"
 
+type bot interface {
+	getGreeting() string
+}
+
 type englishBot struct{}
 
 type spanishBot struct{}
 
-// can omit the parameter name in receiver funcs, if param is not used in func itself
-func (englishBot) getGreeting() string {
-	return "Hello, friend!"
-}
-
-func (spanishBot) getGreeting() string {
-	return "Hola!"
-}
-
-func printGreeting(eb englishBot) {
-	fmt.Println(eb.getGreeting())
-}
-
-// golang does not support overloading, os u can not have two funcs with the same name
-func printGreeting(sb spanishBot) {
-	fmt.Println(sb.getGreeting())
+func printGreeting(b bot) {
+	fmt.Println(b.getGreeting())
 }
 
 func main() {
@@ -30,4 +20,13 @@ func main() {
 
 	printGreeting(eb)
 	printGreeting(sb)
+}
+
+// can omit the parameter name in receiver funcs, if param is not used in func itself
+func (englishBot) getGreeting() string {
+	return "Hello, friend!"
+}
+
+func (spanishBot) getGreeting() string {
+	return "Hola!"
 }
