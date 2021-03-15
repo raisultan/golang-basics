@@ -14,21 +14,26 @@ func main() {
 		"http://amazon.org",
 	}
 
+	// create channel with the type of string
+	c := make(chan string)
+
 	for _, url := range urls {
 		// birth of new child - goroutine
-		go checkUrl(url)
+		go checkUrl(url, c)
 	}
 
+	// will receive only first value and exit
+	fmt.Println(<-c)
 }
 
-func checkUrl(url string) {
+// channel must be passed to func to communicate back and must be fully typed - `c chan string`
+func checkUrl(url string, c chan string) {
 	_, err := http.Get(url) // blocking call
 	if err != nil {
-		fmt.Println("Something wrong with - ", url)
-		return
+		c <- "Something wrong with - " + url
+	} else {
+		c <- "Everything is OK with - " + url
 	}
-
-	fmt.Println("Everything is OK with - ", url)
 }
 
 // everything that executed in golang is executed in goroutines (main func too)
@@ -65,3 +70,5 @@ func checkUrl(url string) {
 // Channel is value, but its behavior and working mechanism is different. it is pub/sub like mechanism.
 // if goroutine has access to a channel, it can receive values passed to the channel by other goroutines.
 // and we should not forget that channels are strictly typed. so data passed and received through the channel can only be of one specifc type.
+
+// note: receiving values from channel is blocking process, so we have to wait for values to receive from channel.
