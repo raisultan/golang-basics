@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"log"
 	"net/http"
 )
 
@@ -16,16 +15,17 @@ func main() {
 	}
 
 	for _, url := range urls {
-		resp, err := http.Get(url)
-		if err != nil {
-			log.Fatal(err)
-		}
-
-		if resp.StatusCode == 200 {
-			fmt.Println("Everything is OK with - ", url)
-		} else {
-			fmt.Println("Something wrong with - ", url)
-		}
+		checkUrl(url)
 	}
 
+}
+
+func checkUrl(url string) {
+	_, err := http.Get(url)
+	if err != nil {
+		fmt.Println("Something wrong with - ", url)
+		return
+	}
+
+	fmt.Println("Everything is OK with - ", url)
 }
