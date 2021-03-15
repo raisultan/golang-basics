@@ -7,6 +7,7 @@ import "fmt"
 // they become member of type bot
 type bot interface {
 	// any custom type that has receiver - getGreeting() is available
+	// if getGreeting would have parameter, we must declare only type of it - getGreeting(int) string
 	getGreeting() string
 }
 
