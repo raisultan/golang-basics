@@ -48,3 +48,10 @@ func checkUrl(url string) {
 // the difference is that now Go Scheduler can run multiple goroutines at the same time, based on number of cores.
 // for example, if machine has 3 enabled cores, then scheduler runs 3 goroutines at once.
 // contrary for one core, when scheduler runs one at a time, and waits for blocking process to launch another goroutine.
+
+// CONCURRENCY[thread switches on the fly] & PARALLELLISM[multiple things at the same time]
+
+// Concurrency means that we can have multiple threads on which we switch execution, based on thread's state.
+// in other words, if one thread starts blocking process, we switch to another thread. concisely, it means that we have smart thread scheduler.
+
+// Parallellism is about processing and doing multiple things - goroutines at the same time, which clearly states that we must have MULTIPLE cores.
