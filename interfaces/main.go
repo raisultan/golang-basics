@@ -39,3 +39,5 @@ func (spanishBot) getGreeting() string {
 // some new terminology
 // CONCRETE TYPES - are types that we can create value of: map, struct, englishBot
 // INTERFACE TYPES - are types that we cannot create value of, instead it declares "interface": interface, bot
+
+// Note: golang supports composition of interfaces - interface that composes multiple
